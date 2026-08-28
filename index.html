@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOOK FIXER — Author Services & Book Growth</title>
+<meta name="description" content="BOOK FIXER helps authors turn their writing into a polished, professional book and build the visibility needed to reach the right readers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0f172a;--navy-l:#1e293b;--char:#334155;--ivory:#faf9f6;--ivory-d:#f5f2eb;--gold:#c9a96e;--gold-d:#a88b52;--txt:#1e293b;--body:#475569;--muted:#94a3b8;--bdr:#e2e0d8;--sh:0 4px 24px rgba(15,23,42,0.08);--sh-lg:0 12px 40px rgba(15,23,42,0.12);}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--ivory);color:var(--body);line-height:1.7}
+h1,h2,h3,h4,h5,h6{font-family:'Cormorant Garamond',serif;color:var(--txt);font-weight:600;line-height:1.2}
+.nav{position:fixed;top:0;left:0;right:0;background:rgba(250,249,246,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);z-index:1000}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--navy);text-decoration:none;letter-spacing:2px;display:flex;align-items:center;gap:0.5rem}
+.logo-icon{width:32px;height:32px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:0.9rem;color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-link{text-decoration:none;color:var(--char);font-size:0.9rem;font-weight:500;transition:color 0.3s;position:relative}
+.nav-link:hover{color:var(--gold-d)}
+.nav-link.active{color:var(--gold-d)}
+.nav-link.active::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--gold)}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.75rem 1.5rem;border-radius:0;font-size:0.9rem;font-weight:500;text-decoration:none;cursor:pointer;transition:all 0.3s ease;border:none;font-family:'Inter',sans-serif}
+.btn-primary{background:var(--navy);color:var(--ivory);border:2px solid var(--navy)}
+.btn-primary:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.btn-outline{background:transparent;color:var(--navy);border:2px solid var(--navy)}
+.btn-outline:hover{background:var(--navy);color:var(--ivory)}
+.btn-gold{background:var(--gold);color:var(--navy);border:2px solid var(--gold)}
+.btn-gold:hover{background:var(--gold-d);border-color:var(--gold-d)}
+.mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem}
+.mobile-toggle span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;transition:0.3s}
+.page{display:none;opacity:0;transition:opacity 0.4s ease;padding-top:72px}
+.page.active{display:block;opacity:1}
+.hero{min-height:calc(100vh - 72px);display:flex;align-items:center;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-l) 100%);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a96e' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");opacity:0.5}
+.hero-inner{max-width:1200px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-eyebrow{font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;font-weight:500}
+.hero h1{font-size:3.5rem;color:var(--ivory);margin-bottom:1.5rem}
+.hero p{font-size:1.15rem;color:rgba(250,249,246,0.8);margin-bottom:2.5rem;max-width:540px;line-height:1.8}
+.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-visual{display:flex;justify-content:center;align-items:center;position:relative}
+.book-showcase{width:320px;height:420px;background:linear-gradient(145deg,var(--gold),var(--gold-d));border-radius:4px 12px 12px 4px;position:relative;box-shadow:-20px 20px 60px rgba(0,0,0,0.3),inset 2px 0 10px rgba(255,255,255,0.1);transform:perspective(1000px) rotateY(-15deg) rotateX(5deg);transition:transform 0.6s ease}
+.book-showcase:hover{transform:perspective(1000px) rotateY(-5deg) rotateX(2deg)}
+.book-showcase::before{content:'';position:absolute;left:0;top:0;bottom:0;width:12px;background:linear-gradient(90deg,rgba(255,255,255,0.2),transparent);border-radius:4px 0 0 4px}
+.book-showcase-inner{position:absolute;inset:2rem;border:1px solid rgba(255,255,255,0.3);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.book-showcase-inner h3{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--navy);margin-bottom:0.5rem}
+.book-showcase-inner p{color:var(--navy);opacity:0.7;font-size:0.9rem}
+.book-spine{position:absolute;left:-30px;top:10px;width:30px;height:400px;background:linear-gradient(90deg,var(--gold-d),var(--gold));transform:rotateY(60deg);border-radius:2px}
+.section{padding:6rem 2rem;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-header h2{font-size:2.5rem;margin-bottom:1rem}
+.section-header p{max-width:600px;margin:0 auto;color:var(--muted)}
+.divider{width:60px;height:2px;background:var(--gold);margin:1.5rem auto}
+.problem-section{background:var(--ivory-d)}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:3rem}
+.problem-card{background:var(--ivory);padding:2rem;border-left:3px solid var(--gold);box-shadow:var(--sh);transition:transform 0.3s,box-shadow 0.3s}
+.problem-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.problem-card h4{font-size:1.1rem;margin-bottom:0.75rem;color:var(--navy)}
+.problem-card p{font-size:0.95rem;color:var(--body)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
+.service-card{background:var(--ivory);border:1px solid var(--bdr);padding:2.5rem;cursor:pointer;transition:all 0.4s ease;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.4s ease}
+.service-card:hover::before{transform:scaleX(1)}
+.service-card:hover{border-color:var(--gold);box-shadow:var(--sh-lg);transform:translateY(-4px)}
+.service-number{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--gold);opacity:0.3;line-height:1;margin-bottom:1rem}
+.service-card h3{font-size:1.4rem;margin-bottom:0.75rem}
+.service-card p{font-size:0.95rem;margin-bottom:1.5rem}
+.service-link{color:var(--gold-d);text-decoration:none;font-weight:500;font-size:0.9rem;display:inline-flex;align-items:center;gap:0.5rem;transition:gap 0.3s}
+.service-link:hover{gap:0.75rem}
+.service-detail-hero{background:var(--navy);padding:6rem 2rem;text-align:center}
+.service-detail-hero h1{color:var(--ivory);font-size:3rem;margin-bottom:1rem}
+.service-detail-hero p{color:rgba(250,249,246,0.7);max-width:600px;margin:0 auto}
+.service-detail-content{max-width:800px;margin:0 auto;padding:4rem 2rem}
+.service-detail-content h3{font-size:1.8rem;margin:3rem 0 1.5rem;color:var(--navy)}
+.service-detail-content h3:first-child{margin-top:0}
+.service-detail-content ul{margin:1rem 0 2rem;padding-left:1.5rem}
+.service-detail-content li{margin-bottom:0.75rem;color:var(--body)}
+.detail-cta{background:var(--ivory-d);padding:3rem;text-align:center;margin-top:3rem;border:1px solid var(--bdr)}
+.detail-cta h4{font-size:1.5rem;margin-bottom:1rem}
+.detail-cta p{margin-bottom:1.5rem;color:var(--muted)}
+.steps-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3rem}
+.step-card{text-align:center;padding:2rem;position:relative}
+.step-number{width:60px;height:60px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--gold);margin:0 auto 1.5rem}
+.step-card h3{font-size:1.3rem;margin-bottom:0.75rem}
+.step-card p{font-size:0.95rem;color:var(--muted)}
+.portfolio-filters{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.filter-btn{padding:0.5rem 1.25rem;background:transparent;border:1px solid var(--bdr);color:var(--body);cursor:pointer;font-family:'Inter',sans-serif;font-size:0.9rem;transition:all 0.3s}
+.filter-btn:hover,.filter-btn.active{background:var(--navy);color:var(--ivory);border-color:var(--navy)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.portfolio-item{background:var(--ivory-d);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--bdr);transition:all 0.3s;position:relative;overflow:hidden}
+.portfolio-item:hover{border-color:var(--gold)}
+.portfolio-item .placeholder-text{color:var(--muted);font-style:italic;text-align:center;padding:2rem}
+.portfolio-item .category-tag{position:absolute;top:1rem;left:1rem;background:var(--navy);color:var(--ivory);padding:0.25rem 0.75rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:1px}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem}
+.testimonial-card{background:var(--ivory);border:1px solid var(--bdr);padding:2.5rem;position:relative}
+.testimonial-card::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--gold);opacity:0.3;position:absolute;top:1rem;right:1.5rem;line-height:1}
+.testimonial-card.placeholder{background:var(--ivory-d);border-style:dashed}
+.testimonial-text{font-style:italic;margin-bottom:1.5rem;color:var(--body);line-height:1.8}
+.testimonial-author{font-weight:600;color:var(--navy)}
+.testimonial-context{font-size:0.85rem;color:var(--muted)}
+.about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:center}
+.about-image{aspect-ratio:3/4;background:linear-gradient(135deg,var(--ivory-d),var(--bdr));display:flex;align-items:center;justify-content:center;border:1px solid var(--bdr)}
+.about-image-placeholder{color:var(--muted);font-style:italic}
+.about-content h2{font-size:2.5rem;margin-bottom:1.5rem}
+.about-content p{margin-bottom:1.5rem;font-size:1.05rem}
+.about-quote{border-left:3px solid var(--gold);padding-left:1.5rem;margin:2rem 0;font-style:italic;color:var(--txt);font-size:1.1rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:1000px;margin:0 auto}
+.contact-info h2{font-size:2.5rem;margin-bottom:1rem}
+.contact-info>p{margin-bottom:2rem;color:var(--muted)}
+.contact-detail{margin-bottom:1.5rem}
+.contact-detail h4{font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold-d);margin-bottom:0.5rem}
+.contact-detail p,.contact-detail a{color:var(--body);text-decoration:none;transition:color 0.3s}
+.contact-detail a:hover{color:var(--gold-d)}
+.contact-form{background:var(--ivory-d);padding:3rem;border:1px solid var(--bdr)}
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;margin-bottom:0.5rem;font-size:0.9rem;font-weight:500;color:var(--txt)}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:0.875rem 1rem;border:1px solid var(--bdr);background:var(--ivory);font-family:'Inter',sans-serif;font-size:0.95rem;color:var(--txt);transition:border-color 0.3s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--gold)}
+.form-group textarea{min-height:120px;resize:vertical}
+.faq-item{border-bottom:1px solid var(--bdr);margin-bottom:0}
+.faq-question{padding:1.5rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:500;color:var(--txt);transition:color 0.3s}
+.faq-question:hover{color:var(--gold-d)}
+.faq-icon{font-size:1.5rem;color:var(--gold);transition:transform 0.3s}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.4s ease}
+.faq-item.open .faq-answer{max-height:500px;padding-bottom:1.5rem}
+.faq-answer p{color:var(--body);line-height:1.7}
+.footer{background:var(--navy);color:var(--ivory);padding:4rem 2rem 2rem}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--ivory);margin-bottom:1rem;letter-spacing:2px}
+.footer-brand p{color:rgba(250,249,246,0.6);font-size:0.95rem;line-height:1.7}
+.footer-col h4{font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:1.5rem}
+.footer-col a{display:block;color:rgba(250,249,246,0.6);text-decoration:none;margin-bottom:0.75rem;font-size:0.95rem;transition:color 0.3s}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:2rem;border-top:1px solid rgba(250,249,246,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{color:rgba(250,249,246,0.4);font-size:0.85rem}
+.cta-banner{background:var(--navy);padding:5rem 2rem;text-align:center}
+.cta-banner h2{color:var(--ivory);font-size:2.5rem;margin-bottom:1rem}
+.cta-banner p{color:rgba(250,249,246,0.7);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto}
+.case-study-card{background:var(--ivory);border:1px solid var(--bdr);padding:3rem;margin-bottom:2rem}
+.case-study-card.placeholder{background:var(--ivory-d);border-style:dashed;text-align:center}
+.case-study-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:2rem}
+.case-study-meta h4{font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--gold-d);margin-bottom:0.5rem}
+@media(max-width:968px){
+.hero-inner{grid-template-columns:1fr;text-align:center}
+.hero h1{font-size:2.5rem}
+.hero p{margin:0 auto 2rem}
+.hero-visual{order:-1}
+.book-showcase{width:260px;height:340px}
+.about-grid{grid-template-columns:1fr}
+.contact-grid{grid-template-columns:1fr}
+.footer-inner{grid-template-columns:1fr 1fr}
+.case-study-grid{grid-template-columns:1fr 1fr}
+.nav-links{position:fixed;top:72px;left:0;right:0;background:var(--ivory);flex-direction:column;padding:2rem;gap:1.5rem;border-bottom:1px solid var(--bdr);transform:translateY(-100%);opacity:0;pointer-events:none;transition:all 0.3s ease}
+.nav-links.open{transform:translateY(0);opacity:1;pointer-events:all}
+.mobile-toggle{display:block}
+}
+@media(max-width:640px){
+.hero h1{font-size:2rem}
+.section-header h2{font-size:1.8rem}
+.services-grid{grid-template-columns:1fr}
+.portfolio-grid{grid-template-columns:1fr}
+.testimonials-grid{grid-template-columns:1fr}
+.footer-inner{grid-template-columns:1fr}
+.case-study-grid{grid-template-columns:1fr}
+.service-detail-hero h1{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+<div class="nav-inner">
+<a href="#home" class="logo" onclick="go('home');return false;">
+<div class="logo-icon">B</div>BOOK FIXER
+</a>
+<div class="nav-links" id="navLinks">
+<a href="#home" class="nav-link active" onclick="go('home');return false;">Home</a>
+<a href="#services" class="nav-link" onclick="go('services');return false;">Services</a>
+<a href="#how-it-works" class="nav-link" onclick="go('how-it-works');return false;">How It Works</a>
+<a href="#portfolio" class="nav-link" onclick="go('portfolio');return false;">Portfolio</a>
+<a href="#about" class="nav-link" onclick="go('about');return false;">About</a>
+<a href="#testimonials" class="nav-link" onclick="go('testimonials');return false;">Testimonials</a>
+<a href="#contact" class="nav-link" onclick="go('contact');return false;">Contact</a>
+<a href="#contact" class="btn btn-primary" onclick="go('contact');return false;">Book a Consultation</a>
+</div>
+<button class="mobile-toggle" onclick="toggleMobile()">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+<section class="hero">
+<div class="hero-inner">
+<div class="hero-content">
+<div class="hero-eyebrow">BOOK FIXER — AUTHOR SERVICES & BOOK GROWTH</div>
+<h1>Your story deserves more than just a finished manuscript.</h1>
+<p>BOOK FIXER helps authors turn their writing into a polished, professional book and build the visibility needed to reach the right readers.</p>
+<div class="hero-buttons">
+<a href="#services" class="btn btn-gold" onclick="go('services');return false;">Explore Services</a>
+<a href="#contact" class="btn btn-outline" onclick="go('contact');return false;" style="border-color:rgba(250,249,246,0.4);color:var(--ivory)">Work With Me</a>
+</div>
+</div>
+<div class="hero-visual">
+<div class="book-showcase">
+<div class="book-spine"></div>
+<div class="book-showcase-inner">
+<h3>Your Book</h3>
+<p>Professionally Presented</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="problem-section">
+<div class="section">
+<div class="section-header">
+<h2>Writing the book is only part of the journey.</h2>
+<div class="divider"></div>
+<p>Authors face different challenges at different stages.</p>
+</div>
+<div class="problem-grid">
+<div class="problem-card"><h4>Manuscript Feedback</h4><p>A manuscript that needs another pair of eyes before it's ready.</p></div>
+<div class="problem-card"><h4>Professional Presentation</h4><p>A book that needs to look as good as traditionally published titles.</p></div>
+<div class="problem-card"><h4>Amazon Positioning</h4><p>An Amazon page that isn't positioned to attract the right readers.</p></div>
+<div class="problem-card"><h4>Discoverability</h4><p>Difficulty getting the book found among thousands of others.</p></div>
+<div class="problem-card"><h4>Launch Strategy</h4><p>A launch without clear direction to build momentum.</p></div>
+<div class="problem-card"><h4>Social Media</h4><p>Content that isn't converting attention into genuine interest.</p></div>
+<div class="problem-card"><h4>Reader Reach</h4><p>Difficulty connecting with readers who would love your book.</p></div>
+<div class="problem-card"><h4>Unclear Next Steps</h4><p>Not knowing what to focus on next in your publishing journey.</p></div>
+</div>
+<div style="text-align:center;margin-top:3rem"><p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--navy);font-style:italic">That's where BOOK FIXER comes in.</p></div>
+</div>
+</section>
+<section class="section">
+<div class="section-header">
+<h2>What I Can Help You With</h2>
+<div class="divider"></div>
+<p>From manuscript to marketing, every service solves real problems.</p>
+</div>
+<div class="services-grid" id="homeServices"></div>
+<div style="text-align:center;margin-top:3rem">
+<a href="#services" class="btn btn-outline" onclick="go('services');return false;">View All Services</a>
+</div>
+</section>
+<section class="cta-banner">
+<h2>Ready to take your book seriously?</h2>
+<p>Let's start with a conversation about where you are and what you need.</p>
+<a href="#contact" class="btn btn-gold" onclick="go('contact');return false;">Book a Consultation</a>
+</section>
+</div>
+
+<!-- SERVICES -->
+<div id="page-services" class="page">
+<section class="service-detail-hero">
+<div class="hero-eyebrow" style="text-align:center">SERVICES</div>
+<h1>Professional Services for Serious Authors</h1>
+<p>Understanding what you actually need and delivering work that moves you forward.</p>
+</section>
+<section class="section">
+<div class="services-grid" id="allServices"></div>
+</section>
+</div>
+
+<!-- SERVICE DETAIL -->
+<div id="page-service-detail" class="page">
+<section class="service-detail-hero">
+<div class="hero-eyebrow" style="text-align:center">SERVICE DETAIL</div>
+<h1 id="sdTitle">Service</h1>
+<p id="sdSubtitle">Description</p>
+</section>
+<div class="service-detail-content" id="sdContent"></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div id="page-how-it-works" class="page">
+<section class="service-detail-hero">
+<div class="hero-eyebrow" style="text-align:center">PROCESS</div>
+<h1>First, we figure out what actually needs fixing.</h1>
+<p>No generic packages. No pushy sales. Just clarity and practical next steps.</p>
+</section>
+<section class="section">
+<div class="steps-container">
+<div class="step-card"><div class="step-number">1</div><h3>Understand</h3><p>Tell me about your book, goals, and current situation.</p></div>
+<div class="step-card"><div class="step-number">2</div><h3>Diagnose</h3><p>Identify the most important problem or opportunity.</p></div>
+<div class="step-card"><div class="step-number">3</div><h3>Recommend</h3><p>Receive clear direction instead of a random package.</p></div>
+<div class="step-card"><div class="step-number">4</div><h3>Fix</h3><p>Work on selected services with clear communication.</p></div>
+<div class="step-card"><div class="step-number">5</div><h3>Grow</h3><p>Help with visibility, promotion, and reader growth.</p></div>
+</div>
+<div class="detail-cta" style="margin-top:4rem">
+<h4>Not sure where you fit?</h4>
+<p>Most authors aren't sure what they need until they talk it through.</p>
+<a href="#contact" class="btn btn-primary" onclick="go('contact');return false;">Start a Conversation</a>
+</div>
+</section>
+</div>
+
+<!-- PORTFOLIO -->
+<div id="page-portfolio" class="page">
+<section class="service-detail-hero">
+<div class="hero-eyebrow" style="text-align:center">PORTFOLIO</div>
+<h1>Work That Speaks for Itself</h1>
+<p>Projects across book design, marketing, and author branding.</p>
+</section>
+<section class="section">
+<div class="portfolio-filters">
+<button class="filter-btn active" onclick="filterP('all')">All</button>
+<button class="filter-btn" onclick="filterP('covers')">Book Covers</button>
+<button class="filter-btn" onclick="filterP('promotion')">Promotion</button>
+<button class="filter-btn" onclick="filterP('social')">Social Media</button>
+<button class="filter-btn" onclick="filterP('branding')">Branding</button>
+<button class="filter-btn" onclick="filterP('marketing')">Marketing</button>
+<button class="filter-btn" onclick="filterP('amazon')">Amazon/KDP</button>
+<button class="filter-btn" onclick="filterP('goodreads')">Goodreads</button>
+<button class="filter-btn" onclick="filterP('arc')">ARC Campaigns</button>
+<button class="filter-btn" onclick="filterP('websites')">Websites</button>
+</div>
+<div class="portfolio-grid" id="portfolioGrid"></div>
+</section>
+</div>
+
+<!-- ABOUT -->
+<div id="page-about" class="page">
+<section class="service-detail-hero">
+<div class="hero-eyebrow" style="text-align:center">ABOUT</div>
+<h1>Meet Temitope.</h1>
+<p>The person behind BOOK FIXER.</p>
+</section>
+<section class="section">
+<div class="about-grid">
+<div class="about-image"><span class="about-image-placeholder">Founder Photo</span></div>
+<div class="about-content">
+<h2>TimKets</h2>
+<p>I work with authors at different stages of the publishing journey — from manuscript development and book presentation to reader outreach, marketing, and launch strategy.</p>
+<div class="about-quote">"Authors shouldn't have to figure out every part of the book journey alone."</div>
+<p>BOOK FIXER was created around that simple idea. Every author who has put in the work to write a book deserves professional support to present it well and reach the readers who need it.</p>
+<p>Whether you're polishing your first draft, preparing for publication, or trying to get your existing book in front of more readers, I bring a straightforward, human approach to helping you move forward.</p>
+<p style="margin-top:2rem"><a href="#contact" class="btn btn-primary" onclick="go('contact');return false;">Let's Talk About Your Book</a></p>
+</div>
+</div>
+</section>
+</div>
+
+<!-- TESTIMONIALS -->
+<div id="page-testimonials" class="page">
+<section class="service-detail-hero">
+<div class="hero-eyebrow" style="text-align:center">TESTIMONIALS</div>
+<h1>What Authors Say</h1>
+<p>Real feedback. No fabrication, no exaggeration.</p>
+</section>
+<section class="section">
+<div class="testimonials-grid">
+<div class="testimonial-card placeholder">
+<p class="testimonial-text">Client testimonial will appear here once projects are completed and feedback is received.</p>
+<div class="testimonial-author">Coming Soon</div>
+<div class="testimonial-context">Placeholder for future testimonial</div>
+</div>
+<div class="testimonial-card placeholder">
+<p class="testimonial-text">Client testimonial will appear here once projects are completed and feedback is received.</p>
+<div class="testimonial-author">Coming Soon</div>
+<div class="testimonial-context">Placeholder for future testimonial</div>
+</div>
+<div class="testimonial-card placeholder">
+<p class="testimonial-text">Client testimonial will appear here once projects are completed and feedback is received.</p>
+<div class="testimonial-author">Coming Soon</div>
+<div class="testimonial-context">Placeholder for future testimonial</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- CASE STUDIES -->
+<div id="page-case-studies" class="page">
+<section class="service-detail-hero">
+<div class="hero-eyebrow" style="text-align:center">CASE STUDIES</div>
+<h1>Project Deep Dives</h1>
+<p>Detailed looks at challenges, approaches, and work completed.</p>
+</section>
+<section class="section">
+<div class="case-study-card placeholder">
+<h3 style="font-size:1.5rem;margin-bottom:1rem;color:var(--muted)">Case studies will be added as projects are completed.</h3>
+<p style="color:var(--muted)">Each will include Challenge, Approach, Work Completed, and Outcome.</p>
+<div class="case-study-grid" style="margin-top:2rem">
+<div class="case-study-meta"><h4>Challenge</h4><p style="color:var(--muted)">To be documented</p></div>
+<div class="case-study-meta"><h4>Approach</h4><p style="color:var(--muted)">To be documented</p></div>
+<div class="case-study-meta"><h4>Work</h4><p style="color:var(--muted)">To be documented</p></div>
+<div class="case-study-meta"><h4>Outcome</h4><p style="color:var(--muted)">To be documented</p></div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="page">
+<section class="service-detail-hero">
+<div class="hero-eyebrow" style="text-align:center">CONTACT</div>
+<h1>Tell me about your book.</h1>
+<p>Whether you're writing, preparing, launching, or growing — let's understand where you are.</p>
+</section>
+<section class="section">
+<div class="contact-grid">
+<div class="contact-info">
+<h2>Start a Conversation</h2>
+<p>I'll get back to you within 24-48 hours. No pressure, no obligation.</p>
+<div class="contact-detail"><h4>Business</h4><p>BOOK FIXER</p></div>
+<div class="contact-detail"><h4>Founder</h4><p>Temitope / TimKets</p></div>
+<div class="contact-detail"><h4>Email</h4><a href="mailto:salesbrandmarketing1@gmail.com">salesbrandmarketing1@gmail.com</a></div>
+</div>
+<div class="contact-form">
+<form id="contactForm" onsubmit="submitForm(event)">
+<div class="form-group"><label>Name *</label><input type="text" name="name" required></div>
+<div class="form-group"><label>Email *</label><input type="email" name="email" required></div>
+<div class="form-group"><label>Book Title</label><input type="text" name="title"></div>
+<div class="form-group"><label>Genre</label><input type="text" name="genre"></div>
+<div class="form-group"><label>Current Stage</label>
+<select name="stage">
+<option value="">Select a stage</option>
+<option>Still Writing</option>
+<option>Editing / Revising</option>
+<option>Preparing for Publication</option>
+<option>Already Published</option>
+<option>Marketing / Growing</option>
+<option>Not Sure</option>
+</select>
+</div>
+<div class="form-group"><label>What do you need help with? *</label><textarea name="needs" required placeholder="Tell me about your project..."></textarea></div>
+<div class="form-group"><label>Budget Range</label>
+<select name="budget">
+<option value="">Select a range</option>
+<option>Under $250</option>
+<option>$250 - $500</option>
+<option>$500 - $1,000</option>
+<option>$1,000+</option>
+<option>Not Sure Yet</option>
+</select>
+</div>
+<div class="form-group"><label>Additional Message</label><textarea name="msg" placeholder="Anything else you'd like to share?"></textarea></div>
+<button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Inquiry</button>
+</form>
+</div>
+</div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-inner">
+<div class="footer-brand">
+<h3>BOOK FIXER</h3>
+<p>Helping authors build better books, stronger positioning, and meaningful reader connections.</p>
+</div>
+<div class="footer-col">
+<h4>Navigate</h4>
+<a href="#services" onclick="go('services');return false;">Services</a>
+<a href="#how-it-works" onclick="go('how-it-works');return false;">How It Works</a>
+<a href="#portfolio" onclick="go('portfolio');return false;">Portfolio</a>
+<a href="#about" onclick="go('about');return false;">About</a>
+</div>
+<div class="footer-col">
+<h4>More</h4>
+<a href="#testimonials" onclick="go('testimonials');return false;">Testimonials</a>
+<a href="#case-studies" onclick="go('case-studies');return false;">Case Studies</a>
+<a href="#contact" onclick="go('contact');return false;">Contact</a>
+<a href="#" onclick="showPrivacy(event);return false;">Privacy Policy</a>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<a href="mailto:salesbrandmarketing1@gmail.com">salesbrandmarketing1@gmail.com</a>
+<p style="color:rgba(250,249,246,0.6);font-size:0.95rem;margin-top:1rem">Temitope / TimKets</p>
+</div>
+</div>
+<div class="footer-bottom">
+<p>BOOK FIXER. All rights reserved.</p>
+<p style="color:rgba(250,249,246,0.4)">Designed with care for authors.</p>
+</div>
+</footer>
+
+<script>
+const services=[
+{id:'manuscript-review',num:'01',name:'Manuscript Review & Beta Reading',short:'Thoughtful feedback before publication.',desc:'Honest, constructive reader feedback on your manuscript before publishing. An outside perspective on what works and what could be stronger.',for:'Authors with a complete draft seeking feedback, self-published authors preparing releases, writers wanting to understand reader response.',problems:['Uncertainty about fresh reader response','Need for honest pre-editing feedback','Character or plot coherence questions','Pacing and engagement concerns'],included:['Overall reader impression','Story and structure feedback','Character development notes','Pacing and momentum analysis','Clarity and consistency observations','Constructive recommendations'],process:'Submit manuscript → Targeted reading → Detailed feedback document → Optional follow-up discussion',deliverables:['Detailed feedback document (PDF)','Strengths and opportunities notes','Actionable recommendations','Optional 30-min discussion'],faq:[{q:'Will you guarantee success?',a:'No. This is feedback, not outcome guarantees. I provide honest observations to help improve your manuscript.'},{q:'What genres?',a:'Most fiction genres. Highly specialized projects discussed first.'},{q:'Timeline?',a:'Typically 2-3 weeks depending on length and queue.'}],cta:'Discuss Your Manuscript'},
+{id:'book-editing',num:'02',name:'Book Editing & Polishing',short:'Professional editing for clarity and flow.',desc:'Respectful editing that preserves your voice while improving clarity, flow, and consistency. A manuscript that reads smoothly and professionally.',for:'Authors with complete drafts needing polish, writers preparing for publication, anyone wanting clean, professional prose.',problems:['Grammar and syntax issues','Inconsistent tone or style','Unclear, confusing passages','Awkward phrasing disrupting flow'],included:['Grammar and syntax correction','Clarity improvements','Readability enhancements','Flow and transitions','Consistency checks','General polish'],process:'Submit manuscript → Assessment → Editing pass → Review → Final delivery',deliverables:['Edited manuscript with tracked changes','Editorial summary','Style consistency notes'],faq:[{q:'What level of editing?',a:'Depends on your manuscript. I assess first and recommend appropriate depth.'},{q:'Will you change my voice?',a:'No. Editing enhances your voice, never replaces it.'},{q:'Non-fiction?',a:'Yes, both fiction and non-fiction.'}],cta:'Discuss My Manuscript'},
+{id:'book-cover',num:'03',name:'Book Cover Design',short:'Professional covers that meet genre expectations.',desc:'Genre-appropriate covers that attract your target reader and compete professionally in digital storefronts.',for:'Self-published authors, indie publishers, anyone wanting traditionally-published-level presentation.',problems:['Covers not signaling correct genre','DIY-looking covers','Poor typography','Thumbnails that fail'],included:['Genre-appropriate visual direction','Target audience consideration','Strong visual hierarchy','Professional typography','Digital storefront optimization','Multiple format adaptations'],process:'Discovery → Concept development → Design presentation → Revisions → Final delivery',deliverables:['High-res cover files','Paperback wrap if needed','Social media assets','Source files'],faq:[{q:'How many concepts?',a:'Typically 2-3 initial concepts from our discovery discussion.'},{q:'What if I dislike them?',a:'We refine direction. Revisions are included to get it right.'},{q:'Illustrations?',a:'I focus on design-driven covers. Complex illustration needs discussed case by case.'}],cta:'Start a Cover Project'},
+{id:'book-formatting',num:'04',name:'Book Formatting',short:'Professional interior layout for print and digital.',desc:'Clean, professional interior formatting for easy reading and visual polish in any format.',for:'Authors preparing for print or e-book who want interiors matching their cover professionalism.',problems:['Inconsistent formatting','Poor typography tiring the eye','Unprofessional chapter headings','E-book breaking on devices'],included:['Professional interior layout','Typography selection','Chapter formatting','Consistency throughout','Print and digital optimization','Table of contents'],process:'Manuscript review → Template selection → Formatting pass → Proof review → Delivery',deliverables:['Print-ready PDF','E-book files (EPUB, MOBI)','Formatting style guide'],faq:[{q:'What formats?',a:'Print-ready PDF, EPUB, and MOBI if specifically needed.'},{q:'Match my cover?',a:'Yes. Interior coordinated with cover typography and style.'},{q:'Complex layouts?',a:'Standard narrative focus. Complex non-fiction discussed first.'}],cta:'Discuss Formatting'},
+{id:'amazon-kdp',num:'05',name:'Amazon / KDP Optimization',short:"Improve your book's Amazon presence.",desc:'Strategic optimization of Amazon and KDP pages for better presentation and discoverability — without false ranking promises.',for:'Published authors needing visibility, authors preparing to launch who want correct setup from day one.',problems:['Descriptions that don\'t sell','Wrong categories','Weak keywords','Poor metadata','Author pages that don\'t build trust'],included:['Book description optimization','Keyword research','Category strategy','Metadata review','Author Central optimization','Product page review'],process:'Page audit → Competitive analysis → Recommendations → Implementation → Follow-up',deliverables:['Optimized description','Keyword strategy document','Category recommendations','Implementation guide'],faq:[{q:'Guaranteed sales?',a:'No. Optimization improves discovery and conversion, but sales depend on many factors.'},{q:'Results timeline?',a:'Effects within days to weeks, best as part of broader strategy.'},{q:'Technical setup?',a:'I provide optimized content and guide implementation, or discuss doing it for you.'}],cta:'Improve My Book Page'},
+{id:'goodreads',num:'06',name:'Goodreads Optimization',short:'Build presence on the largest book community.',desc:'Improve Goodreads presence for better discoverability and a more engaging author profile.',for:'Authors wanting to leverage Goodreads for reader outreach, those with presence but unsure if it works.',problems:['Incomplete author profiles','Missing book information','Poor search visibility','Missed reader connection opportunities'],included:['Book profile optimization','Author profile presentation','Discoverability improvements','Reader-facing presentation','Strategic positioning advice'],process:'Profile audit → Gap analysis → Optimization → Implementation guidance',deliverables:['Optimized profiles','Strategy recommendations','Ongoing presence tips'],faq:[{q:'More reviews guaranteed?',a:'No. Optimization improves discoverability; reviews come from genuine readers.'},{q:'Worth the effort?',a:'For many authors, yes. Active, engaged community of book searchers.'},{q:'Goodreads ads?',a:'Not a primary service, but strategic advice available.'}],cta:'Improve My Goodreads Presence'},
+{id:'arc-campaigns',num:'07',name:'ARC Campaigns & Reader Outreach',short:'Organized outreach to build reader relationships.',desc:'Strategic ARC campaigns connecting your book with genuinely interested readers, organized professionally and ethically.',for:'Authors preparing for launch wanting early readers, published authors building review base and community.',problems:['Difficulty finding relevant readers','Unorganized distribution','No follow-up system','Uncertainty about platform rules','Low outreach response'],included:['Campaign planning and timeline','Reader targeting strategy','ARC setup','Outreach messaging','Campaign organization','Follow-up planning','Participation tracking','Ethical review guidance'],process:'Book assessment → Targeting → Setup → Outreach → Follow-up → Results review',deliverables:['Campaign plan','Outreach templates','Tracking system','Results summary'],faq:[{q:'Guaranteed reviews?',a:'Absolutely not. Ethical outreach only. Reviews are voluntary and honest.'},{q:'How many readers?',a:'Depends on genre, budget, and goals. Realistic expectations discussed upfront.'},{q:'Amazon compliant?',a:'Yes. No incentivized reviews, swapping, or manipulation ever.'}],cta:'Plan My ARC Campaign'},
+{id:'book-marketing',num:'08',name:'Book Marketing & Launch Strategy',short:'Support for launches and ongoing promotion.',desc:'Strategic support for authors preparing to launch or promote, with practical planning and audience-focused direction.',for:'Authors with a launch date approaching, published authors wanting structured promotion, anyone needing marketing clarity.',problems:['No launch plan','Unclear audience targeting','Scattered promotional efforts','Post-launch visibility drop'],included:['Audience positioning','Launch planning','Promotional strategy','Content direction','Reader targeting','Campaign planning','Post-launch visibility'],process:'Situation assessment → Strategy development → Plan creation → Implementation support',deliverables:['Launch strategy document','Promotional timeline','Content recommendations','Implementation checklist'],faq:[{q:'Guaranteed bestseller?',a:'No. I provide strategy and support, not outcome guarantees.'},{q:'Do you run ads?',a:'I advise on ad strategy. Direct ad management discussed separately.'},{q:'Already published books?',a:'Yes. Marketing strategy works for new launches and backlist promotion.'}],cta:'Plan My Book Launch'},
+{id:'social-media',num:'09',name:'Social Media Content & Book Promotion',short:'Content that converts attention into interest.',desc:'Content support for authors on TikTok, Instagram, and other platforms — ideas, graphics, and messaging that connects.',for:'Authors wanting consistent social presence, those struggling to convert followers into readers, anyone needing content direction.',problems:['Inconsistent posting','Content that doesn\'t connect','No clear book promotion angle','Low engagement conversion'],included:['Content ideas','Promotional graphics','Carousel content','Short-form concepts','Caption writing','Content planning','Audience-focused messaging'],process:'Platform audit → Strategy → Content creation → Scheduling guidance → Review',deliverables:['Content strategy','Graphic templates','Caption library','Posting schedule'],faq:[{q:'Which platforms?',a:'Primarily TikTok and Instagram, but adaptable to others.'},{q:'Do you post for me?',a:'I create content and strategy. Posting management discussed separately.'},{q:'How often?',a:'Depends on your capacity and goals. We find a sustainable rhythm.'}],cta:'Build My Content Strategy'},
+{id:'email-marketing',num:'10',name:'Email Marketing & Author Newsletters',short:'Build direct reader relationships through email.',desc:'Newsletter strategy and email campaigns that keep readers engaged and informed about your books.',for:'Authors wanting direct reader communication, those building launch lists, anyone wanting to own their audience relationship.',problems:['No email list strategy','Infrequent or inconsistent newsletters','Low open rates','Emails that don\'t convert to sales'],included:['Newsletter strategy','Campaign planning','Launch emails','Reader updates','Promotional sequences','Audience engagement tactics'],process:'List audit → Strategy → Template creation → Campaign planning → Launch',deliverables:['Email strategy document','Templates and sequences','Campaign calendar','Engagement recommendations'],faq:[{q:'Which platform?',a:'I work with most major providers. Recommendations based on your needs.'},{q:'How often to email?',a:'Depends on your audience and capacity. Quality over quantity.'},{q:'Can you write the emails?',a:'Yes. I can write sequences and individual campaign emails.'}],cta:'Build My Email Strategy'},
+{id:'author-website',num:'11',name:'Author Website / Book Landing Page',short:'Professional web presence for your author brand.',desc:'Author-focused websites and landing pages that showcase your books and convert visitors into readers.',for:'Authors needing professional web presence, those wanting a central hub for their books and brand.',problems:['No professional web presence','DIY sites that look amateur','No clear book showcase','Missing newsletter signup','Poor mobile experience'],included:['Author profile page','Book showcase','Newsletter signup integration','Book purchase links','Launch information','Contact page','Reader-focused design'],process:'Discovery → Wireframing → Design → Development → Launch → Training',deliverables:['Responsive website','CMS access','Training session','Launch checklist'],faq:[{q:'What platform?',a:'I typically use WordPress or Webflow. Discussed based on your needs.'},{q:'Do I own it?',a:'Yes. Full ownership and access provided.'},{q:'Ongoing maintenance?',a:'Training provided. Ongoing support available separately.'}],cta:'Build My Author Website'},
+{id:'shopify-store',num:'12',name:'Shopify Author Store',short:'Sell directly to readers with your own store.',desc:'Dedicated online stores for authors to sell books and build direct reader relationships through Shopify.',for:'Authors wanting direct sales, those building merchandise lines, anyone wanting to own their customer relationship.',problems:['No direct sales channel','Losing margin to retailers','No customer data ownership','Complex store setup'],included:['Store setup','Book/product pages','Author branding','Email collection','Conversion-focused structure','Reader-friendly shopping'],process:'Discovery → Store setup → Product configuration → Branding → Launch → Training',deliverables:['Live Shopify store','Product listings','Branded theme','Training documentation'],faq:[{q:'Shopify fees?',a:'Shopify has monthly fees separate from my service. Discussed upfront.'},{q:'Print-on-demand?',a:'Yes, can integrate with POD services for direct fulfillment.'},{q:'Do you manage it ongoing?',a:'Setup and training included. Ongoing management discussed separately.'}],cta:'Build My Author Store'}
+];
+
+const portfolioItems=[
+{cat:'covers',label:'Book Covers'},{cat:'promotion',label:'Book Promotion'},{cat:'social',label:'Social Media Content'},{cat:'branding',label:'Author Branding'},{cat:'marketing',label:'Marketing'},{cat:'amazon',label:'Amazon/KDP'},{cat:'goodreads',label:'Goodreads'},{cat:'arc',label:'ARC Campaigns'},{cat:'websites',label:'Author Website'}
+];
+
+function go(page){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById('page-'+page).classList.add('active');
+document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+document.querySelectorAll('.nav-link').forEach(l=>{
+if(l.getAttribute('onclick')&&l.getAttribute('onclick').includes("'"+page+"'"))l.classList.add('active');
+});
+window.scrollTo(0,0);
+document.getElementById('navLinks').classList.remove('open');
+if(page==='services')renderAllServices();
+if(page==='home')renderHomeServices();
+}
+
+function renderHomeServices(){
+const grid=document.getElementById('homeServices');
+if(!grid||grid.children.length>0)return;
+services.slice(0,6).forEach(s=>{
+grid.innerHTML+=`<div class="service-card" onclick="goService('${s.id}')">
+<div class="service-number">${s.num}</div>
+<h3>${s.name}</h3>
+<p>${s.short}</p>
+<span class="service-link">Learn More →</span>
+</div>`;
+});
+}
+
+function renderAllServices(){
+const grid=document.getElementById('allServices');
+if(!grid||grid.children.length>0)return;
+services.forEach(s=>{
+grid.innerHTML+=`<div class="service-card" onclick="goService('${s.id}')">
+<div class="service-number">${s.num}</div>
+<h3>${s.name}</h3>
+<p>${s.short}</p>
+<span class="service-link">View Details →</span>
+</div>`;
+});
+}
+
+function goService(id){
+const s=services.find(x=>x.id===id);
+if(!s)return;
+document.getElementById('sdTitle').textContent=s.name;
+document.getElementById('sdSubtitle').textContent=s.desc;
+let html=`<h3>Who This Is For</h3><p>${s.for}</p>`;
+html+=`<h3>The Problem</h3><ul>${s.problems.map(p=>`<li>${p}</li>`).join('')}</ul>`;
+html+=`<h3>What's Included</h3><ul>${s.included.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+html+=`<h3>The Process</h3><p>${s.process}</p>`;
+html+=`<h3>Deliverables</h3><ul>${s.deliverables.map(d=>`<li>${d}</li>`).join('')}</ul>`;
+html+=`<h3>FAQ</h3>`;
+s.faq.forEach((f,i)=>{
+html+=`<div class="faq-item" onclick="this.classList.toggle('open')">
+<div class="faq-question">${f.q}<span class="faq-icon">+</span></div>
+<div class="faq-answer"><p>${f.a}</p></div>
+</div>`;
+});
+html+=`<div class="detail-cta">
+<h4>Ready to ${s.cta.split(' ').slice(1).join(' ')}?</h4>
+<p>Let's discuss your specific situation and how this service fits your needs.</p>
+<a href="#contact" class="btn btn-primary" onclick="go('contact');return false;">${s.cta}</a>
+<p style="margin-top:1.5rem"><a href="#contact" style="color:var(--muted);font-size:0.9rem" onclick="go('contact');return false;">Not sure what you need? Start here →</a></p>
+</div>`;
+document.getElementById('sdContent').innerHTML=html;
+go('service-detail');
+}
+
+function filterP(cat){
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+const grid=document.getElementById('portfolioGrid');
+grid.innerHTML='';
+const items=cat==='all'?portfolioItems:portfolioItems.filter(i=>i.cat===cat);
+items.forEach(item=>{
+grid.innerHTML+=`<div class="portfolio-item">
+<span class="category-tag">${item.label}</span>
+<span class="placeholder-text">Portfolio example will be added here.<br><br>High-quality project showcase<br>coming soon.</span>
+</div>`;
+});
+}
+
+function toggleMobile(){document.getElementById('navLinks').classList.toggle('open');}
+
+function submitForm(e){
+e.preventDefault();
+alert('Thank you for your inquiry! This is a demo form. In production, this would send your message to salesbrandmarketing1@gmail.com');
+e.target.reset();
+}
+
+function showPrivacy(e){
+e.preventDefault();
+alert('Privacy Policy: BOOK FIXER respects your data. Information collected through this form is used solely to respond to your inquiry and is never sold or shared with third parties.');
+}
+
+renderHomeServices();
+filterP('all');
+</script>
+</body>
+</html>
